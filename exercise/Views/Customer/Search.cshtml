@@ -1,0 +1,43 @@
+﻿@model IEnumerable<exercise.Models.Customer>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Type To Search By Customer Name</h2>
+@using (Html.BeginForm())
+            {
+                @Html.TextBox("x")
+    <input type="submit" class="btn btn-success" value="Search" />
+
+            }
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Customer Age</th>
+            <th>Customer Adress</th>
+            <th>Book Name</th>
+            <th>Branch Adress</th>
+            <th>Properties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.customerID</td>
+                <td>@item.customerName</td>
+                <td>@item.customerAge</td>
+                <td>@item.customerAdress</td>
+                <td>@item.Book.bookName</td>
+                <td>@item.Branch.branchAdress</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { @id = item.customerID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { @id = item.customerID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

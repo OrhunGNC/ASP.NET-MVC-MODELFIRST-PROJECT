@@ -1,0 +1,41 @@
+﻿@model IEnumerable<exercise.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<h2>Books Table</h2>
+@Html.ActionLink("Create", "Create", null, new {@class="btn btn-success"})
+@Html.ActionLink("Search", "Search", null, new {@class="btn btn-info"})
+<br />
+<br />
+<table class="table table-success">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Writer</th>
+            <th>Book Price</th>
+            <th>Book Release Date</th>
+            <th>Branch Adress</th>
+            <th>Properties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.bookID</td>
+                    <td>@item.bookName</td>
+                    <td>@item.bookWriter</td>
+                    <td>@item.bookPrice</td>
+                    <td>@item.bookReleasedate</td>
+                    <td>@item.Branch.branchAdress</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { @id = item.bookID }, new {@class="btn btn-primary"})
+                        @Html.ActionLink("Delete", "Delete", new { @id = item.bookID }, new {@class="btn btn-danger"})
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+

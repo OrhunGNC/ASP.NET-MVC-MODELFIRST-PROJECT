@@ -1,0 +1,39 @@
+﻿@model IEnumerable<exercise.Models.Branch>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Type To Search By Branch Adress</h2>
+@using (Html.BeginForm())
+            {
+                @Html.TextBox("x")
+    <input type="submit" class="btn btn-success" value="Search" />
+            }
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Branch ID</th>
+            <th>Branch Adress</th>
+            <th>Branch Book Count</th>
+            <th>Branch Personel Count</th>
+            <th>Properties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.branchID</td>
+                <td>@item.branchAdress</td>
+                <td>@item.branchBookCount</td>
+                <td>@item.branchPersonelCount</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { @id = item.branchID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { @id = item.branchID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

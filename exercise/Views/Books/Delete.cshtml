@@ -1,0 +1,36 @@
+﻿@model exercise.Models.Book
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Are You Sure You Want To Delete This Book?</h2>
+@using (Html.BeginForm())
+            {
+                <table class="table table-danger">
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Book Name</th>
+                            <th>Book Writer</th>
+                            <th>Book Price</th>
+                            <th>Book Release Date</th>
+                            <th>Branch Adress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.bookID</td>
+                            <td>@Model.bookName</td>
+                            <td>@Model.bookWriter</td>
+                            <td>@Model.bookPrice</td>
+                            <td>@Model.bookReleasedate</td>
+                            <td>@Model.Branch.branchAdress</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <input type="submit" class="btn btn-danger" value="Delete" />
+                @Html.ActionLink("Back To List", "Index", null, new { @class="btn btn-secondary" })
+            }
+

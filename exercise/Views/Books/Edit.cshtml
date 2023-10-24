@@ -1,0 +1,56 @@
+﻿@model exercise.Models.Book
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Edit Books</h2>
+@using (Html.BeginForm())
+            {
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(x => x.bookName, "Book Name")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.bookName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.bookName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.bookWriter, "Book Writer")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.bookWriter, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.bookWriter, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.bookPrice, "Book Price")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.bookPrice, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.bookPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.bookReleasedate, "Book Release Date")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.bookReleasedate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.bookReleasedate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.branchID, "Branch Adress")
+            <br />
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.branchID, (List<SelectListItem>)ViewBag.data2)
+                @Html.ValidationMessageFor(x => x.branchID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <input type="submit" class="btn btn-success" value="Update" />
+        @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-secondary"})
+    </div>
+            }
+

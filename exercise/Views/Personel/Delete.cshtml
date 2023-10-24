@@ -1,0 +1,34 @@
+﻿@model exercise.Models.Personel
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Are You Sure You Want To Delete Personel</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x=>x.personelID)
+    <table class="table table-danger">
+        <thead>
+            <tr>
+                <th>Personel ID</th>
+                <th>Personel Name</th>
+                <th>Personel Salary</th>
+                <th>Branch Adress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.personelID</td>
+                <td>@Model.personelName</td>
+                <td>@Model.personelSalary</td>
+                <td>@Model.Branch.branchAdress</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-secondary"})
+}
+

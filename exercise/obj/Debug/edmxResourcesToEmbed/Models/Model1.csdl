@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="KutuphaneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="KutuphaneModel.Admin" />
+    <EntitySet Name="Books" EntityType="KutuphaneModel.Book" />
+    <EntitySet Name="Branches" EntityType="KutuphaneModel.Branch" />
+    <EntitySet Name="Customers" EntityType="KutuphaneModel.Customer" />
+    <EntitySet Name="Personels" EntityType="KutuphaneModel.Personel" />
+    <EntitySet Name="sysdiagrams" EntityType="KutuphaneModel.sysdiagram" />
+    <AssociationSet Name="FK_Books_Branch" Association="KutuphaneModel.FK_Books_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Books" Association="KutuphaneModel.FK_Customer_Books">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Branch" Association="KutuphaneModel.FK_Customer_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personel_Branch" Association="KutuphaneModel.FK_Personel_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Personel" EntitySet="Personels" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="adminDI" />
+    </Key>
+    <Property Name="adminDI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="bookID" />
+    </Key>
+    <Property Name="bookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bookName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bookWriter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bookPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="bookReleasedate" Type="DateTime" Precision="0" />
+    <Property Name="branchID" Type="Int32" />
+    <NavigationProperty Name="Branch" Relationship="KutuphaneModel.FK_Books_Branch" FromRole="Book" ToRole="Branch" />
+    <NavigationProperty Name="Customers" Relationship="KutuphaneModel.FK_Customer_Books" FromRole="Book" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="branchID" />
+    </Key>
+    <Property Name="branchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branchAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branchBookCount" Type="Int32" />
+    <Property Name="branchPersonelCount" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="KutuphaneModel.FK_Books_Branch" FromRole="Branch" ToRole="Book" />
+    <NavigationProperty Name="Customers" Relationship="KutuphaneModel.FK_Customer_Branch" FromRole="Branch" ToRole="Customer" />
+    <NavigationProperty Name="Personels" Relationship="KutuphaneModel.FK_Personel_Branch" FromRole="Branch" ToRole="Personel" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerAge" Type="Int32" />
+    <Property Name="customerAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bookID" Type="Int32" />
+    <Property Name="branchID" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="KutuphaneModel.FK_Customer_Books" FromRole="Customer" ToRole="Book" />
+    <NavigationProperty Name="Branch" Relationship="KutuphaneModel.FK_Customer_Branch" FromRole="Customer" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Personel">
+    <Key>
+      <PropertyRef Name="personelID" />
+    </Key>
+    <Property Name="personelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="personelSalary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="branchID" Type="Int32" />
+    <NavigationProperty Name="Branch" Relationship="KutuphaneModel.FK_Personel_Branch" FromRole="Personel" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Books_Branch">
+    <End Type="KutuphaneModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="branchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Books">
+    <End Type="KutuphaneModel.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="bookID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="bookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Branch">
+    <End Type="KutuphaneModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="branchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personel_Branch">
+    <End Type="KutuphaneModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Personel" Role="Personel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchID" />
+      </Principal>
+      <Dependent Role="Personel">
+        <PropertyRef Name="branchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

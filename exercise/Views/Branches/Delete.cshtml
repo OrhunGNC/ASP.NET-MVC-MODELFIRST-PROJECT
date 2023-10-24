@@ -1,0 +1,34 @@
+﻿@model exercise.Models.Branch
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Are You Sure You Want To Delete This Branch?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.branchID)
+    <table class="table table-danger">
+        <thead>
+            <tr>
+                <th>Branch ID</th>
+                <th>Branch Adress</th>
+                <th>Branch Book Count</th>
+                <th>Branch Personel Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.branchID</td>
+                <td>@Model.branchAdress</td>
+                <td>@Model.branchBookCount</td>
+                <td>@Model.branchPersonelCount</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-secondary" })
+}
+

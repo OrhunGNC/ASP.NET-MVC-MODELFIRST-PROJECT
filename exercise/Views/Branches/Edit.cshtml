@@ -1,0 +1,42 @@
+﻿@model exercise.Models.Branch
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Edit Branch</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x=>x.branchID)
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(x => x.branchAdress, "Branch Adress")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.branchAdress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.branchAdress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.branchBookCount, "Branch Book Count")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.branchBookCount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.branchBookCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.branchPersonelCount, "Branch Personel Count")
+            <br />
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.branchPersonelCount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.branchPersonelCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <input type="submit" class="btn btn-success" value="Update" />
+        @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-secondary"})
+    </div>
+}
+
+

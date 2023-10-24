@@ -1,0 +1,38 @@
+﻿@model IEnumerable<exercise.Models.Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Personel Table</h2>
+@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Search", "Search", null, new {@class="btn btn-info"})
+<br />
+<br />
+<table class="table table-danger">
+    <thead>
+        <tr>
+            <th>Personel ID</th>
+            <th>Personel Name</th>
+            <th>Personel Salary</th>
+            <th>Branch Adress</th>
+            <th>Properties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.personelID</td>
+                <td>@item.personelName</td>
+                <td>@item.personelSalary</td>
+                <td>@item.Branch.branchAdress</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { @id = item.personelID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { @id = item.personelID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
